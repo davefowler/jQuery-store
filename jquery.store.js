@@ -118,6 +118,10 @@ $.extend( $.store.prototype, {
 	{
 		this.driver.flush();
 	},
+        keys: function() 
+        {
+	        return this.driver.keys();
+	},
 	driver : undefined,
 	encoders : [],
 	decoders : [],
@@ -197,7 +201,16 @@ $.store.drivers = {
 		flush: function()
 		{
 			window.localStorage.clear();
+		},	 
+	        keys: function() 
+	        {
+		        var i, keys = [];
+		        for (i = 0; i < window.localStorage.length; i++) {
+			    keys.push(window.localStorage.key(i));
+			}
+			return keys;
 		}
+
 	},
 	
 	// IE6, IE7
